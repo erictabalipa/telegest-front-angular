@@ -1,0 +1,114 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div class="col-6 justify-content-start">
+            <label class="fs-3 fw-bold text-uppercase mb-2">Ordens de serviço</label>
+            <p class="fs-6 fw-light text-muted mb-4">Gestão de ordens de serviço.</p>
+        </div>
+        <div class="d-flex col-6 justify-content-end" style="align-items: flex-start">
+            <button routerLink="/service-order/create" mat-raised-button color="primary">+ Nova ordem de serviço</button>
+        </div>
+    </div>   
+    <mat-card class="my-custom-card mt-4">
+        <div class="d-flex justify-content-between" style="align-items:baseline">
+            <mat-form-field appearance="standard" style="width:84%!important">
+                <mat-label>Buscar ordem de serviço</mat-label>
+                <input matInput (keyup)="doFilter($event)" placeholder="Buscar OS" #input>
+            </mat-form-field>
+            <div class="d-flex" style="align-items:center;">
+                <button color="primary" mat-stroked-button [matMenuTriggerFor]="menu">
+                    Exportar dados
+                    <mat-icon class="ps-1" style="font-size:21px!important">browser_updated</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                    <button mat-menu-item
+                        (click)="exporter.exportTable('xlsx', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">EXCEL</button>
+                    <button mat-menu-item
+                        (click)="exporter.exportTable('csv', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">CSV</button>
+                    <button mat-menu-item (click)="exporter.exportTable('txt', {fileName:tableName+this.downloadDate, sheet:tableName, Props:
+              {Author: 'Sistema de Telegestão'}})">WORD</button>
+                </mat-menu>
+            </div>
+        </div>
+        <mat-card-content>
+            <table mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort>
+
+                <!-- CodeOS Column -->
+                <ng-container matColumnDef="cod">
+                    <th style="width:5%" mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+                    <td style="width:5%" [class.table-line-inactive]="element.cod === 0" mat-cell
+                        *matCellDef="let element">
+                        {{ element.cod }}
+                    </td>
+                </ng-container>
+
+                <!-- Responsible Column -->
+                <ng-container matColumnDef="responsible">
+                    <th style="width:auto" mat-header-cell *matHeaderCellDef mat-sort-header>Responsável</th>
+                    <td style="width:auto" [class.table-line-inactive]="element.responsible === 0" mat-cell
+                        *matCellDef="let element">
+                        {{ element.responsible }}
+                    </td>
+                </ng-container>
+
+                <!-- Priority Column -->
+                <ng-container matColumnDef="priority">
+                    <th style="width:auto" mat-header-cell *matHeaderCellDef mat-sort-header>Prioridade</th>
+                    <td style="width:auto" [class.table-line-inactive]="element.priority === 0" mat-cell
+                        *matCellDef="let element">
+                        {{ element.priority }}
+                    </td>
+                </ng-container>
+
+                <!-- MaxDate Column -->
+                <ng-container matColumnDef="maxDate">
+                    <th style="width:15%; text-align: center;" mat-header-cell *matHeaderCellDef>Prazo</th>
+                    <td style="width:15%; text-align: center;"
+                        [class.table-line-inactive]="element.maxDate === 0" mat-cell
+                        *matCellDef="let element">
+                        {{ element.maxDate }}
+                    </td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th style="width:10%" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                    <td style="width:10%" [class.table-line-inactive]="element.status === 0" mat-cell
+                        *matCellDef="let element">
+                        {{ element.status }}
+                    </td>
+                </ng-container>
+
+                <!-- ConclusionDate Column -->
+                <ng-container matColumnDef="conclusionDate">
+                    <th style="width:15%; text-align: center;" mat-header-cell *matHeaderCellDef>Conclusão</th>
+                    <td style="width:15%; text-align: center;"
+                        [class.table-line-inactive]="element.conclusionDate === 0"
+                        mat-cell *matCellDef="let element">
+                        {{ element.conclusionDate }}
+                    </td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th style="width:13%; text-align: center;" mat-header-cell *matHeaderCellDef>Ações</th>
+                    <td style="width:13%; text-align: center;" class="actions" [class.table-line-inactive]="element.actions === 0"
+                        mat-cell *matCellDef="let element; let empIndex=index">
+                        <button class="btn-warning" mat-icon-button>
+                            <mat-icon class="material-icons-outlined">edit</mat-icon>
+                        </button>
+                        <button class="btn-primary" mat-icon-button (click)="generatePdf(empIndex)">
+                           <mat-icon class="material-icons-outlined">download</mat-icon>
+                        </button>
+                        <button class="btn-danger" mat-icon-button (click)="openDialog()">
+                            <mat-icon class="material-icons-outlined">delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>

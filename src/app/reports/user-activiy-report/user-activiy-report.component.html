@@ -1,0 +1,90 @@
+<div class="container">
+    <label class="fs-3 fw-bold text-uppercase mb-2">Relatório de ações</label>
+    <p class="fs-6 fw-light text-muted mb-4">Histórico de todas as ações executadas pelos usuários dentro do software.</p>
+    <mat-card class="my-custom-card mt-4">
+        <div class="d-flex justify-content-between" style="align-items:baseline">
+            <div class="d-flex col-9">
+                <mat-form-field appearance="standard">
+                    <mat-label>Buscar ações executadas pelos usuários</mat-label>
+                    <input matInput type="text" placeholder="Buscar ações executadas pelos usuários" />
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-end col-3">
+                <div class="d-flex">
+                    <button color="primary" mat-stroked-button [matMenuTriggerFor]="menuFilter">
+                        Filtrar
+                        <mat-icon class="ps-1" class="material-icons-outlined" style="font-size:21px!important">
+                            filter_alt</mat-icon>
+                    </button>
+                    <mat-menu #menuFilter="matMenu" xPosition="before">
+                        <mat-checkbox class="ms-2 p-1">Filtro 1</mat-checkbox>
+                    </mat-menu>
+                </div>
+                <div class="d-flex ms-3">
+                    <button color="primary" mat-stroked-button [matMenuTriggerFor]="menu">
+                        Exportar relatório
+                        <mat-icon class="ps-1" style="font-size:21px!important">browser_updated</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        <button mat-menu-item
+                            (click)="exporter.exportTable('xlsx', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">EXCEL</button>
+                        <button mat-menu-item
+                            (click)="exporter.exportTable('csv', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">CSV</button>
+                        <button mat-menu-item (click)="exporter.exportTable('txt', {fileName:tableName+this.downloadDate, sheet:tableName, Props:
+              {Author: 'Sistema de Telegestão'}})">WORD</button>
+                        <button mat-menu-item (click)="generatePdf()">PDF</button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+        <mat-card-content>
+            <table mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.id }}
+                    </td>
+                </ng-container>
+
+                <!-- Date Name Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.date }}
+                    </td>
+                </ng-container>
+
+                <!-- Username Column -->
+                <ng-container matColumnDef="user_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuário</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.user_name }}
+                    </td>
+                </ng-container>
+
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ação</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.action }}
+                    </td>
+                </ng-container>
+
+                <!-- Device Column -->
+                <ng-container matColumnDef="device">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Dispositivo</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.device }}
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>

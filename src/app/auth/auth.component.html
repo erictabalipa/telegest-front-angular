@@ -1,0 +1,33 @@
+<div class="container-login">
+  <mat-card class="card-default">
+    <mat-card-subtitle class="sm-title"> Acesse sua conta. </mat-card-subtitle>
+    <mat-card-title class="lg-title"> Informe seus dados. </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submitForm()" class="auth-form">
+        <mat-form-field appearance="fill" class="field-group">
+          <mat-label>E-mail</mat-label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            formControlName="email"
+            matInput
+            placeholder="ex: pat@example.com"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field-group">
+          <mat-label>Senha</mat-label>
+          <input
+            formControlName="password"
+            type="password"
+            name="password"
+            id="password"
+            matInput
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary">Acessar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

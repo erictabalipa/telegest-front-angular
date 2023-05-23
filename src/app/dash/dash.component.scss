@@ -1,0 +1,86 @@
+.content {
+  height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  color: lightgray;
+}
+
+.dash-card {
+  max-width: 24%;
+  width: 24%;
+}
+
+.dash-card-lg {
+  max-width: 49%;
+  width: 49%;
+  height: 100&;
+}
+
+.mar-inl-end{
+  margin-inline-end: 1rem;
+  margin-inline-start: 1rem;
+}
+
+.dash-card-title{
+  font-size: 18px!important;
+  display: flex;
+  align-items: center;
+}
+
+.dash-card-total-content{
+  font-size: 14px !important;
+  font-weight: bold !important;
+  flex-direction: column !important;
+}
+
+
+
+.dash-card-label-title{
+  font-size: 18px !important;
+  font-weight: bold !important;
+  color: rgb(49, 38, 97) !important;
+  line-height: 15px !important;
+}
+
+.dash-card-label-info{
+  font-size: 11px !important;
+  font-weight: normal !important;
+  color: rgb(94, 92, 103) !important;
+  line-height: 15px !important;
+}
+
+.tt-card-info{
+  font-size: 14px !important;
+}
+
+.total-card-info{
+  min-width:55%;
+  width:auto;
+  height:100%;
+  padding:3%;
+  border-radius:15px;
+  color:white;
+  background-color:rgb(135 122 214);
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+mat-card-title-group > div{
+  width: 100%!important;
+}
+mat-card-content.mat-card-content{
+  margin-bottom: 0px!important;
+}
+.mat-expansion-panel-body {
+  padding: 0px 16px 16px 16px;
+}

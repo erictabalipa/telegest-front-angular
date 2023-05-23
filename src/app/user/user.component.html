@@ -1,0 +1,77 @@
+<div class="container">
+  
+  <div class="d-flex justify-content-between">
+    <div class="col-6 justify-content-start">
+      <label class="fs-3 fw-bold text-uppercase mb-2">Usuários</label>
+      <p class="fs-6 fw-light text-muted mb-4">Gestão e cadastro de usuários.</p>
+    </div>
+    <div class="d-flex col-6 justify-content-end" style="align-items: flex-start">
+      <button routerLink="/user/create" mat-raised-button color="primary">+ Novo usuário</button>
+    </div>
+  </div>
+
+  <mat-card class="my-custom-card mt-4">
+
+    <div class="d-flex justify-content-between" style="align-items:baseline">
+      <mat-form-field appearance="standard" style="width:84%!important">
+        <mat-label>Buscar usuário</mat-label>
+        <input matInput (keyup)="doFilter($event)" placeholder="Buscar usuário" #input>
+      </mat-form-field>
+      <div class="d-flex" style="align-items:center;">
+        <button color="primary" mat-stroked-button [matMenuTriggerFor]="menu">
+          Exportar dados
+          <mat-icon class="ps-1" style="font-size:21px!important">browser_updated</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item
+            (click)="exporter.exportTable('xlsx', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">EXCEL</button>
+          <button mat-menu-item
+            (click)="exporter.exportTable('csv', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">CSV</button>
+            <button mat-menu-item
+              (click)="exporter.exportTable('txt', {fileName:tableName+this.downloadDate, sheet:tableName, Props:
+              {Author: 'Sistema de Telegestão'}})">WORD</button>
+        </mat-menu>
+      </div>
+    </div>
+
+    <mat-card-content>
+      <table mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource"
+        matSort>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td [class.table-line-inactive]="element.status === 0" mat-cell *matCellDef="let element">
+            {{ element.id }}
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuário</th>
+          <td [class.table-line-inactive]="element.status === 0" mat-cell *matCellDef="let element">
+            {{ element.name }}
+          </td>
+        </ng-container>
+
+        <!-- Permission Column -->
+        <ng-container matColumnDef="permission">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Permissão</th>
+          <td [class.table-line-inactive]="element.permission === 0" mat-cell *matCellDef="let element">
+            {{ element.permission }}
+          </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td [class.table-line-inactive]="element.email === 0" mat-cell *matCellDef="let element">
+            {{ element.email }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr (click)="redirectToItem(2)" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

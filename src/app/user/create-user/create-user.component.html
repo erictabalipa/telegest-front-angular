@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <div class="col-6 justify-content-start">
+      <label class="fs-3 fw-bold text-uppercase mb-2">Cadastro de usuários</label>
+    </div>
+    <div class="d-flex col-6 justify-content-end" style="align-items: flex-start">
+      <button routerLink="/user" mat-stroked-button color="secondary">
+        <i class="bx bx-left-arrow-alt"></i> Voltar
+      </button>
+    </div>
+  </div>
+   <!-- ---------------- -->
+   <form [formGroup]="userForm">
+     <mat-card class="mt-3">
+      
+        <p class="fs-6 fw-light text-muted mb-3 mt-2">
+          Preencha as informaçãos abaixo para cadastrar um novo usuário
+        </p>
+  
+       <div class="group-2-fields">
+         <div class="field-group">
+           <mat-form-field class="w-100" appearance="standard">
+             <mat-label>Usuario</mat-label>
+             <input matInput formControlName="user" required />
+           </mat-form-field>
+         </div>
+         <div class="field-group">
+           <mat-form-field class="w-100" appearance="standard">
+             <mat-label>Email</mat-label>
+             <input matInput formControlName="email" required />
+           </mat-form-field>
+         </div>
+       </div>
+       <div class="group-2-fields mt-0">
+         <div class="field-group">
+           <mat-form-field class="w-100" appearance="standard">
+             <mat-label>Senha</mat-label>
+             <input matInput formControlName="password" required />
+           </mat-form-field>
+         </div>
+         <div class="field-group">
+           <mat-form-field class="select-default" class="w-100" appearance="standard">
+             <mat-label>Permissao</mat-label>
+             <mat-select matInput required>
+               <mat-option *ngFor="let permission of permissions" [value]="permission.id">
+                 {{ permission.title }}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </div>
+       </div>
+       <div class="d-flex justify-content-between">
+         <button routerLink="/user" mat-stroked-button color="warn" class="col-3 btn-danger">
+           <i class="bx bx-trash"></i> Cancelar
+         </button>
+         <button mat-raised-button class="col-3" color="primary" (click)="submitForm()">
+           + Criar usuário
+         </button>
+       </div>
+     </mat-card>
+   </form>
+   
+</div>
+
+ 

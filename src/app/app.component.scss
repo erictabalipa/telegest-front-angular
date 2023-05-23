@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.sub-menu-items{
+  padding-left: 1rem
+}
+
+.example-container{
+  height: 92%;
+}
+
+.nav-items-align{
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between!important
+}
+
+.side-nav {
+  width: 100%;
+  max-width: 240px;
+}
+
+.side-item {
+  width: 100%;
+  padding: auto 0;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 0;
+  font-family: "Poppins";
+  font-size: 16px;
+  transition: 0.3s all;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+

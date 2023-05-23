@@ -1,0 +1,27 @@
+.mb-default {
+  padding-bottom: 40px;
+}
+.mt-default {
+  margin-top: 40px;
+}
+.ml-button {
+  margin-left: 15px;
+}
+.ml-button-centered {
+  width: 20%;
+  margin-left: 40%;
+  margin-right: 40%
+}
+
+.group-2-fields {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  .field-group {
+    width: 100%;
+  }
+}
+
+.col-3.btn-danger:hover {
+  color: white!important;
+} 

@@ -1,0 +1,136 @@
+<div class="container">
+    <label class="fs-3 fw-bold text-uppercase mb-2">Relatório de ordens de serviço</label>
+    <p class="fs-6 fw-light text-muted mb-4">Histórico de todas as ordens de serviço.
+    </p>
+    <mat-card class="my-custom-card mt-4">
+        <div class="d-flex justify-content-between" style="align-items:baseline">
+            <div class="d-flex col-9">
+                <mat-form-field appearance="standard">
+                    <mat-label>Buscar ordem de serviço</mat-label>
+                    <input matInput type="text" placeholder="Buscar ordens de serviços" />
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-end col-3">
+                <div class="d-flex">
+                    <button color="primary" mat-stroked-button [matMenuTriggerFor]="menuFilter">
+                        Filtrar
+                        <mat-icon class="ps-1" class="material-icons-outlined" style="font-size:21px!important">
+                            filter_alt</mat-icon>
+                    </button>
+                    <mat-menu #menuFilter="matMenu" xPosition="before">
+                        <mat-checkbox class="ms-2 p-1">Filtro 1</mat-checkbox>
+                    </mat-menu>
+                </div>
+                <div class="d-flex ms-3">
+                    <button color="primary" mat-stroked-button [matMenuTriggerFor]="menu">
+                        Exportar relatório
+                        <mat-icon class="ps-1" style="font-size:21px!important">browser_updated</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        <button mat-menu-item
+                            (click)="exporter.exportTable('xlsx', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">EXCEL</button>
+                        <button mat-menu-item
+                            (click)="exporter.exportTable('csv', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">CSV</button>
+                        <button mat-menu-item (click)="exporter.exportTable('txt', {fileName:tableName+this.downloadDate, sheet:tableName, Props:
+              {Author: 'Sistema de Telegestão'}})">WORD</button>
+                        <button mat-menu-item (click)="generatePdf()">PDF</button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+        <mat-card-content>
+            <table mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                    <td [class.table-line-inactive]="element.status === 0" mat-cell *matCellDef="let element">
+                        {{ element.id }}
+                    </td>
+                </ng-container>
+
+                <!-- Code Column -->
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+                    <td [class.table-line-inactive]="element.status === 0" mat-cell *matCellDef="let element">
+                        {{ element.code }}
+                    </td>
+                </ng-container>
+
+                <!-- Responsible Column -->
+                <ng-container matColumnDef="responsible">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsável</th>
+                    <td [class.table-line-inactive]="element.fabricator === 0" mat-cell *matCellDef="let element">
+                        {{ element.responsible }}
+                    </td>
+                </ng-container>
+
+                <!-- Type Column -->
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+                    <td [class.table-line-inactive]="element.permission === 0" mat-cell *matCellDef="let element">
+                        {{ element.type }}
+                    </td>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+                    <td [class.table-line-inactive]="element.lamp_status === 0" mat-cell *matCellDef="let element">
+                        {{ element.description }}
+                    </td>
+                </ng-container>
+
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Status</th>
+                    <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                        {{ element.status }}
+                    </td>
+                </ng-container>
+
+                <!-- Created_at Column -->
+                <ng-container matColumnDef="created_at">
+                    <th mat-header-cell *matHeaderCellDef>Criação</th>
+                    <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                        {{ element.created_at }}
+                    </td>
+                </ng-container>
+
+                <!-- Conclusion_date Column -->
+                <ng-container matColumnDef="conclusion_date">
+                    <th mat-header-cell *matHeaderCellDef>Conclusão</th>
+                    <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                       {{ element.conclusion_date }}
+                    </td>
+                </ng-container>
+
+                 <!-- Updated_date Column -->
+                 <ng-container matColumnDef="updated_at">
+                     <th mat-header-cell *matHeaderCellDef>Atualizada</th>
+                     <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                         {{ element.updated_at }}
+                     </td>
+                 </ng-container>
+
+                 <!-- Deleted Column -->
+                 <ng-container matColumnDef="deleted">
+                     <th mat-header-cell *matHeaderCellDef>Excluída</th>
+                     <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                        <label *ngIf="element.deleted">
+                            Sim
+                        </label>
+                        <label *ngIf="!element.deleted">
+                            Não
+                        </label>
+                     </td>
+                 </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>

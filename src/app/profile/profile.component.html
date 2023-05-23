@@ -1,0 +1,32 @@
+<div class="container col-6">
+    <mat-card>
+        <mat-card-header class="d-flex justify-content-center mb-3">
+             <mat-card-title class="text-center">Meus dados</mat-card-title>
+             <mat-card-subtitle class="text-center">Informações e atualização de perfil</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="d-flex justify-content-center" style="flex-direction: column; align-items: center"> 
+            <img class="col-11 form-profile-img mb-3" src="https://marketplace.canva.com/EAE6OJ2qP8U/1/0/1600w/canva-gamer-with-glasses-character-twitch-profile-picture-CVfgWIJGgRo.jpg">
+            <mat-form-field class="col-11" appearance="standard">
+                <mat-label>Usuário</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+            <mat-form-field class="col-11" appearance="standard">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="email">
+            </mat-form-field>
+            <mat-form-field class="col-11" appearance="standard">
+                <mat-label>Senha</mat-label>
+                <input matInput type="password">
+            </mat-form-field>
+            <mat-form-field class="col-11" appearance="standard">
+                <mat-label>Permissão</mat-label>
+                <mat-select>
+                    <mat-option value="administrador">Administrador</mat-option>
+                    <mat-option value="tecnico">Tecnico</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button type="submit" class="mt-1 mb-2 col-11 btn btn-success">SALVAR</button>
+        </mat-card-content>
+    </mat-card>
+</div>
+

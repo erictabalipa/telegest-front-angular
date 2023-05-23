@@ -1,0 +1,116 @@
+<div class="container">
+    <label class="fs-3 fw-bold text-uppercase mb-2">Relatório de luminárias</label>
+    <p class="fs-6 fw-light text-muted mb-4">Luminárias cadastradas no software</p>
+    <mat-card class="my-custom-card mt-4">
+        <div class="d-flex justify-content-between" style="align-items:baseline">
+            <div class="d-flex col-9">
+                <mat-form-field appearance="standard">
+                    <mat-label>Buscar luminária</mat-label>
+                    <input matInput type="text" placeholder="Buscar luminárias cadastradas" />
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-end col-3">
+                 <div class="d-flex">
+                     <button color="primary" mat-stroked-button [matMenuTriggerFor]="menuFilter">
+                         Filtrar
+                         <mat-icon class="ps-1" class="material-icons-outlined" style="font-size:21px!important">
+                             filter_alt</mat-icon>
+                     </button>
+                     <mat-menu #menuFilter="matMenu" xPosition="before">
+                         <mat-checkbox class="ms-2 p-1">Filtro 1</mat-checkbox>
+                     </mat-menu>
+                 </div>
+                 <div class="d-flex ms-3">
+                     <button color="primary" mat-stroked-button [matMenuTriggerFor]="menu">
+                         Exportar relatório
+                         <mat-icon class="ps-1" style="font-size:21px!important">browser_updated</mat-icon>
+                     </button>
+                     <mat-menu #menu="matMenu" xPosition="before">
+                         <button mat-menu-item
+                             (click)="exporter.exportTable('xlsx', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">EXCEL</button>
+                         <button mat-menu-item
+                             (click)="exporter.exportTable('csv', {fileName:tableName+this.downloadDate, sheet:tableName, Props: {Author: 'Sistema de Telegestão'}})">CSV</button>
+                         <button mat-menu-item (click)="exporter.exportTable('txt', {fileName:tableName+this.downloadDate, sheet:tableName, Props:
+              {Author: 'Sistema de Telegestão'}})">WORD</button>
+                         <button mat-menu-item (click)="generatePdf()">PDF</button>
+                     </mat-menu>
+                 </div>
+            </div>
+        </div>
+        <mat-card-content>
+            <table mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort>
+
+                <!-- Lamp ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                    <td [class.table-line-inactive]="element.status === 0" mat-cell *matCellDef="let element">
+                        {{ element.id }}
+                    </td>
+                </ng-container>
+
+                <!-- Lamp Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Luminária</th>
+                    <td [class.table-line-inactive]="element.status === 0" mat-cell *matCellDef="let element">
+                        {{ element.name }}
+                    </td>
+                </ng-container>
+
+                <!-- Fabricator Column -->
+                <ng-container matColumnDef="fabricator">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fabricante</th>
+                    <td [class.table-line-inactive]="element.fabricator === 0" mat-cell *matCellDef="let element">
+                        {{ element.fabricator }}
+                    </td>
+                </ng-container>
+
+                <!-- Model Column -->
+                <ng-container matColumnDef="modelo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+                    <td [class.table-line-inactive]="element.permission === 0" mat-cell *matCellDef="let element">
+                        {{ element.modelo }}
+                    </td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="lamp_status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                    <td [class.table-line-inactive]="element.lamp_status === 0" mat-cell *matCellDef="let element">
+                        {{ element.lamp_status }}
+                    </td>
+                </ng-container>
+
+
+                <!-- Location Column -->
+                <ng-container matColumnDef="location">
+                    <th mat-header-cell *matHeaderCellDef>CEP</th>
+                    <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                        <label *ngIf="element.lamp_status === 'Instalada'">
+                            {{ element.location }}
+                        </label>
+                        <label *ngIf="element.lamp_status === 'Disponível'">
+                            --------
+                        </label>
+                    </td>
+                </ng-container>
+
+                <!-- Lamp State Column -->
+                <ng-container matColumnDef="lamp_state">
+                    <th mat-header-cell *matHeaderCellDef>Estado atual</th>
+                    <td [class.table-line-inactive]="element.location === 0" mat-cell *matCellDef="let element">
+                        <label *ngIf="element.lamp_state">
+                            Ligada
+                        </label>
+                        <label *ngIf="!element.lamp_state">
+                            Desligada
+                        </label>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>

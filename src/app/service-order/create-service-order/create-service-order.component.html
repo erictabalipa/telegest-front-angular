@@ -1,0 +1,544 @@
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex col-6 justify-content-start">
+            <label class="fs-3 fw-bold text-uppercase mb-2">Cadastro de Ordem de serviço</label>
+        </div>
+        <div class="d-flex col-6 justify-content-end" style="align-items: flex-start">
+            <button routerLink="/service-order" mat-stroked-button color="secondary">
+                <i class="bx bx-left-arrow-alt"></i> Voltar
+            </button>
+        </div>
+    </div>
+    <!-- <mat-stepper [linear]="true" #stepper class="mt-3">
+        <form class="d-flex justify-content-start" style="flex-direction: column;">
+            <mat-step [formGroup]="basic">
+                <mat-card>
+                    <mat-card-header id="titleStepOne">
+                        <mat-card-title>Informações básicas da O.S</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <ng-template matStepLabel>Informações básicas</ng-template>
+                        <div class="d-flex col-12 justify-content-between">
+                            <mat-form-field id="cod" class="d-flex col-2" appearance="standard">
+                                <mat-label>Código</mat-label>
+                                <input matInput placeholder="Código" formControlName="firstCtrl" required>
+                            </mat-form-field>
+                            <mat-form-field id="priority" class="d-flex col-2" appearance="standard">
+                                <mat-label>Prioridade</mat-label>
+                                <mat-select placeholder="Prioridade" formControlName="firstCtrl" required>
+                                    <mat-option value="Baixa">Baixa</mat-option>
+                                    <mat-option value="Normal">Normal</mat-option>
+                                    <mat-option value="Alta">Alta</mat-option>
+                                    <mat-option value="Urgente">Urgente</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field id="maxDate" class="d-flex col-3" appearance="standard">
+                                <mat-label>Prazo</mat-label>
+                                <input matInput placeholder="Prazo" formControlName="firstCtrl"
+                                    [matDatepicker]="pickerMaxDate" required>
+                                <mat-datepicker-toggle matSuffix [for]="pickerMaxDate"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerMaxDate></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field id="resp" class="d-flex col-4" appearance="standard">
+                                <mat-label>Responsável técnico</mat-label>
+                                <mat-select placeholder="Código" formControlName="firstCtrl" required>
+                                    <mat-option value="User1">User1</mat-option>
+                                    <mat-option value="User1">User2</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="d-flex col-12 justify-content-end mt-4">
+                            <button class="d-flex col-auto" color="primary" mat-raised-button matStepperNext>
+                                Adicionar luminárias
+                                <mat-icon class="ms-2 material-symbols-outlined">
+                                    queue_play_next
+                                </mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-step>
+            <mat-step label="Luminárias e serviços">
+                <mat-card>
+                    <mat-card-header id="titleStepOne">
+                        <mat-card-title>Luminárias da O.S</mat-card-title>
+                    </mat-card-header>
+                     <div class="d-flex col-12 justify-content-between">
+                        <mat-form-field id="cod1" class="col-5" appearance="standard">
+                            <mat-label>Luminária</mat-label>
+                            <mat-select placeholder="Luminária" formControlName="secondCtrl" required>
+                                <mat-option value="Lamp1">Lamp1</mat-option>
+                                <mat-option value="Lamp2">Lamp2</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field id="resp1" class="col-5" appearance="standard">
+                            <mat-label>Tipo de serviço</mat-label>
+                            <mat-select placeholder="Tipo de serviço" formControlName="secondCtrl" required>
+                                <mat-option value="instalacao">Instalação</mat-option>
+                                <mat-option value="corretiva">Manutenção Corretiva</mat-option>
+                                <mat-option value="preventiva">Manutenção Preventiva</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
+                    </div> 
+                 
+                     <div class="d-flex col-12 justify-content-start mt-3">
+                        <mat-card-header id="titleStepOne">
+                            <mat-card-subtitle
+                                style="text-transform: uppercase;font-weight: bold;margin-bottom:0px!important">
+                                Informações de endereço</mat-card-subtitle>
+                        </mat-card-header>
+                    </div>
+                    <div class="d-flex col-12 justify-content-start">
+                        <mat-form-field class="col-2 me-3" appearance="standard">
+                            <mat-label>CEP</mat-label>
+                            <input id="cep" name="cep" #cep matInput required class="fo" />
+                        </mat-form-field>
+                        <div class="input-group-append d-flex col-auto" style="align-items: center;">
+                            <button class="col-auto" mat-stroked-button color="primary" type="button"
+                                (click)="buscaCep(cep.value)">
+                                <mat-icon>travel_explore</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex col-12 justify-content-start">
+                        <mat-form-field class="col-2 me-4" appearance="standard">
+                            <mat-label>Estado</mat-label>
+                            <input matInput required [value]="this.address?.uf" />
+                        </mat-form-field>
+                        <mat-form-field class="col-4 me-5" appearance="standard">
+                            <mat-label>Cidade</mat-label>
+                            <input matInput required [value]="this.address?.localidade" />
+                        </mat-form-field>
+                        <mat-form-field class="col-5" appearance="standard">
+                            <mat-label>Bairro</mat-label>
+                            <input matInput required [value]="this.address?.bairro" />
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex col-12 justify-content-start">
+                        <mat-form-field class="col-5 me-4" appearance="standard">
+                            <mat-label>Rua</mat-label>
+                            <input matInput required [value]="this.address?.logradouro" />
+                        </mat-form-field>
+                        <mat-form-field class="col-1 me-5" appearance="standard">
+                            <mat-label>Número</mat-label>
+                            <input type="text" min="0" matInput required />
+                        </mat-form-field>
+                        <mat-form-field class="col-5" appearance="standard">
+                            <mat-label>Referência</mat-label>
+                            <input matInput />
+                        </mat-form-field>
+                    </div>
+                    END ENDEREÇO DE INSTALACAO
+                    <div class="input-group-append d-flex col-3" style="align-items: center;">
+                        <button class="col-12" mat-stroked-button color="primary" type="button"
+                            (click)="buscaCep(cep.value)">
+                            <mat-icon>add</mat-icon>
+                            Adicionar luminária
+                        </button>
+                    </div>
+                </mat-card>
+                <div class="d-flex col-12 justify-content-between mt-4">
+                    <button class="d-flex col-2" color="secondary" mat-stroked-button matStepperPrevious>
+                        <i class="bx bx-left-arrow-alt"></i> Voltar
+                    </button>
+                    <button class="d-flex col-2" color="primary" mat-raised-button matStepperNext>Confirmar
+                        dados</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Confirmar O.S</ng-template>
+                <p>You are now done.</p>
+                <div class="d-flex col-12 justify-content-between">
+                    <button class="d-flex col-2" color="secondary" mat-stroked-button matStepperPrevious>
+                        <i class="bx bx-left-arrow-alt"></i> Voltar
+                    </button>
+                    <button class="d-flex col-2 btn-success" mat-raised-button matStepperNext>Criar Ordem de
+                        Serviço</button>
+                </div>
+            </mat-step>
+        </form>
+    </mat-stepper> -->
+    <mat-stepper [linear]="true" #stepper class="mt-3">
+        <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+            <div formArrayName="services">
+                <div *ngFor="let service of services().controls; let empIndex=index">
+                    <div [formGroupName]="empIndex">
+                         <mat-step label="Informações básicas">
+                            <mat-card>
+                                <mat-card-header id="titleStepOne">
+                                    <mat-card-title>Informações básicas da O.S</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <ng-template matStepLabel>Informações básicas</ng-template>
+                                    <div class="d-flex col-12 justify-content-between">
+                                        <mat-form-field id="code" class="d-flex col-2" appearance="standard">
+                                            <mat-label>Código</mat-label>
+                                            <input matInput type="text" formControlName="code" placeholder="Código"/>
+                                        </mat-form-field>
+                                        <mat-form-field id="priority" class="d-flex col-2" appearance="standard">
+                                            <mat-label>Prioridade</mat-label>
+                                            <mat-select placeholder="Prioridade" formControlName="priority">
+                                                <mat-option value="Baixa">Baixa</mat-option>
+                                                <mat-option value="Normal">Normal</mat-option>
+                                                <mat-option value="Alta">Alta</mat-option>
+                                                <mat-option value="Urgente">Urgente</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field id="maxDate" class="d-flex col-2" appearance="standard">
+                                            <mat-label>Prazo</mat-label>
+                                            <input matInput placeholder="Prazo" formControlName="maxDate"
+                                                [matDatepicker]="pickerMaxDate">
+                                            <mat-datepicker-toggle matSuffix [for]="pickerMaxDate">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #pickerMaxDate></mat-datepicker>
+                                        </mat-form-field>
+                                        <mat-form-field id="responsible" class="d-flex col-2" appearance="standard">
+                                            <mat-label>Responsável técnico</mat-label>
+                                            <mat-select placeholder="Responsável técnico" formControlName="responsible">
+                                                <mat-option value="User1">User1</mat-option>
+                                                <mat-option value="User2">User2</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="d-flex col-12 justify-content-end mt-4">
+                                        <button class="d-flex col-auto" color="primary" mat-raised-button
+                                            matStepperNext>
+                                            Adicionar luminárias
+                                            <mat-icon class="ms-2 material-symbols-outlined">
+                                                queue_play_next
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                         </mat-step>
+                          <mat-step label="Luminárias e serviços">
+                            <mat-card>
+                                <mat-card-header id="titleStepOne">
+                                    <mat-card-title>Luminárias da O.S</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                     <div formArrayName="lamps">
+                                         <div *ngFor="let Lamp of serviceLamps(empIndex).controls; let LampIndex=index">
+                                             <div [formGroupName]="LampIndex">
+                                                <mat-card class="mb-3">
+                                                    <mat-card-header id="titleStepOne" class="d-flex justify-content-between">
+                                                        <mat-card-title class="d-flex align-items-center"
+                                                            style="text-transform: uppercase;font-size:
+                                                            16px;margin-bottom:0px!important;color:#673ab7;font-weight:bold">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-1"
+                                                                style="width:31px;height:31px;font-size:30px">
+                                                                online_prediction
+                                                            </mat-icon>
+                                                            <span style="line-height:normal!important">{{LampIndex + 1}}ª LUMINÁRIA</span>
+                                                        </mat-card-title>
+                                                         <div class="d-flex justify-content-center col-auto align-items-center">
+                                                             <button mat-stroked-button color="warn"
+                                                                 (click)="removeserviceLamp(empIndex,LampIndex)" style="min-width: 40px!important;">
+                                                                 <mat-icon class="material-symbols-outlined">delete
+                                                                 </mat-icon>
+                                                             </button>
+                                                         </div>
+                                                    </mat-card-header>
+                                                    <mat-card-content>
+                                                        <div class="d-flex col-12 justify-content-between">
+                                                            <mat-form-field id="name" style="width:52%"
+                                                                appearance="standard">
+                                                                <mat-label>Luminária</mat-label>
+                                                                <mat-select placeholder="Luminária"
+                                                                    formControlName="name" required>
+                                                                    <mat-option value="Lamp1">Lamp1</mat-option>
+                                                                    <mat-option value="Lamp2">Lamp2</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <mat-form-field id="service_type" class="col-5 me-4"
+                                                                appearance="standard">
+                                                                <mat-label>Tipo de serviço</mat-label>
+                                                                <mat-select placeholder="Tipo de serviço"
+                                                                    formControlName="service_type" required>
+                                                                    <mat-option value="instalacao">Instalação
+                                                                    </mat-option>
+                                                                    <mat-option value="Manutenção corretiva">Manutenção
+                                                                        Corretiva
+                                                                    </mat-option>
+                                                                    <mat-option value="Manutenção preventiva">Manutenção
+                                                                        Preventiva
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="ms-2">
+                                                             <div class="d-flex col-12 justify-content-start mt-4">
+                                                                 <mat-card-header id="titleStepOne">
+                                                                     <mat-card-subtitle id="titleStepOne"
+                                                                         class="d-flex align-items-center" style="text-transform: uppercase;font-weight:
+                                                            normal;margin-bottom:0px!important;color:#673ab7">
+                                                                         <mat-icon color="primary"
+                                                                             class="material-symbols-outlined me-2"
+                                                                             style="height:19px;width:19px;font-size:18px">
+                                                                             pin_drop
+                                                                         </mat-icon>
+                                                                         INFORMAÇÕES DE ENDEREÇO
+                                                                     </mat-card-subtitle>
+                                                                 </mat-card-header>
+                                                             </div>
+                                                             <div class="d-flex col-12 justify-content-start">
+                                                                 <mat-form-field class="col-2 me-3"
+                                                                     appearance="standard">
+                                                                     <mat-label>CEP</mat-label>
+                                                                     <input id="cep" name="cep" #cep matInput required
+                                                                         class="fo" formControlName="cep" />
+                                                                 </mat-form-field>
+                                                                 <div class="input-group-append d-flex col-auto"
+                                                                     style="align-items: center;">
+                                                                     <button class="col-auto" mat-stroked-button
+                                                                         color="primary" type="button"
+                                                                         (click)="buscaCep(cep.value)">
+                                                                         <mat-icon>travel_explore</mat-icon>
+                                                                     </button>
+                                                                 </div>
+                                                             </div>
+                                                             <div class="d-flex col-12 justify-content-start">
+                                                                 <mat-form-field class="col-2 me-4"
+                                                                     appearance="standard">
+                                                                     <mat-label>Estado</mat-label>
+                                                                     <input id="state" name="state" #state matInput
+                                                                         [value]="this.address?.uf"
+                                                                         formControlName="state" />
+                                                                 </mat-form-field>
+                                                                 <mat-form-field class="col-4 me-5"
+                                                                     appearance="standard">
+                                                                     <mat-label>Cidade</mat-label>
+                                                                     <input matInput [value]="this.address?.localidade"
+                                                                         formControlName="city" />
+                                                                 </mat-form-field>
+                                                                 <mat-form-field class="col-5" appearance="standard">
+                                                                     <mat-label>Bairro</mat-label>
+                                                                     <input matInput [value]="this.address?.bairro"
+                                                                         formControlName="district" />
+                                                                 </mat-form-field>
+                                                             </div>
+                                                             <div class="d-flex col-12 justify-content-start">
+                                                                 <mat-form-field class="col-5 me-4"
+                                                                     appearance="standard">
+                                                                     <mat-label>Rua</mat-label>
+                                                                     <input matInput [value]="this.address?.logradouro"
+                                                                         formControlName="street" />
+                                                                 </mat-form-field>
+                                                                 <mat-form-field class="col-1 me-5"
+                                                                     appearance="standard">
+                                                                     <mat-label>Número</mat-label>
+                                                                     <input matInput formControlName="number" />
+                                                                 </mat-form-field>
+                                                                 <mat-form-field class="col-5" appearance="standard">
+                                                                     <mat-label>Referência</mat-label>
+                                                                     <input matInput formControlName="reference" />
+                                                                 </mat-form-field>
+                                                             </div>
+                                                        </div>
+                                                    </mat-card-content>
+                                                   
+                                                </mat-card>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="d-flex col-12 justify-content-end">
+                                        <button color="primary" mat-stroked-button type="button"
+                                            (click)="addserviceLamp(empIndex)">
+                                            <mat-icon>add</mat-icon>
+                                            Adicionar luminária
+                                        </button>
+                                     </div>
+                                     
+                                     <div class="mt-5 d-flex col-12 justify-content-between">
+                                         <button class="d-flex col-2" color="secondary" mat-stroked-button
+                                             matStepperPrevious>
+                                             <i class="bx bx-left-arrow-alt"></i> Voltar
+                                         </button>
+                                         <button class="d-flex col-auto" color="primary" mat-raised-button
+                                             matStepperNext>
+                                             Revisar e criar OS
+                                             <mat-icon class="material-symbols-outlined">
+                                                 chevron_right
+                                             </mat-icon>
+                                         </button>
+                                     </div>
+                                </mat-card-content>
+                                
+                            </mat-card>
+                          </mat-step>
+                        <mat-step label="Confirmar dados da OS">
+                            <mat-card>
+                                <mat-card-header id="titleStepOne">
+                                    <mat-card-title>Revisar e confirmar dados da O.S</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <mat-card>
+                                        <mat-card-content *ngFor="let service of this.empForm.value.services">
+                                            <div class="d-flex col-12 justify-content-between">
+                                                <div class="d-flex col-2">
+                                                    <span class="fixed-span">Código:</span>
+                                                    <span class="dynamic-span ms-2">{{service.code}}</span>
+                                                </div>
+                                                <div class="d-flex col-2">
+                                                    <span class="fixed-span">Prioridade:</span>
+                                                    <span class="dynamic-span ms-2">{{service.priority}}</span>
+                                                </div>
+                                                <div class="d-flex col-3">
+                                                    <span class="fixed-span">Prazo:</span>
+                                                    <span class="dynamic-span ms-2">{{service.maxDate | date:'dd/MM/yyyy'}}</span>
+                                                </div>
+                                                <div class="d-flex col-4">
+                                                    <span class="fixed-span">Responsável:</span>
+                                                    <span class="dynamic-span ms-2">{{service.responsible}}</span>
+                                                </div>
+                                            </div>
+                                        </mat-card-content>
+                                    </mat-card>
+
+                                    <mat-card class="mt-3">
+                                        <mat-card-content>
+                                            <div class="d-flex col-12 justify-content-start mb-3">
+                                                <span class="fixed-span-title">LUMINÁRIAS E SERVIÇOS</span>
+                                            </div>
+                                            <mat-accordion class="example-headers-align" multi>
+                                                <mat-expansion-panel
+                                                    *ngFor="let lamp of this.empForm.value.services[0].lamps; let LampIndex=index">
+                                                    <mat-expansion-panel-header>
+                                                        <mat-panel-title
+                                                            style="color:#280326!important;font-weight: bold;">
+                                                            {{LampIndex + 1}}ª LUMINÁRIA
+                                                        </mat-panel-title>
+                                                    </mat-expansion-panel-header>
+                                                    <div class="d-flex col-12 ms-1">
+                                                        <span class="d-flex col-6">
+                                                            <mat-icon color="primary" class="material-symbols-outlined me-2" style="height:19px;width:19px;font-size:18px">
+                                                                model_training    
+                                                            </mat-icon>
+                                                            <span class="fixed-span">Identificação:</span>
+                                                            <span class="dynamic-span ms-2">{{lamp.name}}</span>
+                                                        </span>
+                                                        <span class="d-flex col-5">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:19px;width:19px;font-size:18px">
+                                                                manage_search
+                                                            </mat-icon>
+                                                            <span class="fixed-span">Tipo do serviço:</span>
+                                                            <span class="dynamic-span ms-2">{{lamp.service_type}}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex col-12 justify-content-start mt-4 mb-3 ms-1">
+                                                        <mat-icon color="primary" class="material-symbols-outlined me-2"
+                                                            style="height:19px;width:19px;font-size:18px">
+                                                            pin_drop
+                                                        </mat-icon>
+                                                        <span class="fixed-span">INFORMAÇÕES DE ENDEREÇO</span>
+                                                    </div>
+                                                    <div class="d-flex col-12 justify-content-start ms-4">
+                                                        <span class="d-flex col-2">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">CEP:</span>
+                                                            <span
+                                                                class="dynamic-span fnt-sz-sm ms-2">{{lamp.cep}}</span>
+                                                        </span>
+                                                        <span class="d-flex col-2">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">ESTADO:</span>
+                                                            <span
+                                                                class="dynamic-span fnt-sz-sm ms-2">{{this.lamp.state}}</span>
+                                                        </span>
+                                                        <span class="d-flex col-3">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">CIDADE:</span>
+                                                            <span
+                                                                class="dynamic-span fnt-sz-sm ms-2">{{lamp.city}}</span>
+                                                        </span>
+                                                        <span class="d-flex col-auto">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">BAIRRO:</span>
+                                                            <span
+                                                                class="dynamic-span fnt-sz-sm ms-2">{{lamp.district}}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex col-12 justify-content-start ms-4 mt-3">
+                                                        <span class="d-flex col-auto me-5">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">LOGRADOURO:</span>
+                                                            <span
+                                                                class="dynamic-span fnt-sz-sm
+                                                                ms-2">{{lamp.street}}</span>
+                                                        </span>
+                                                        <span class="d-flex col-2">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">NÚMERO:</span>
+                                                            <span class="dynamic-span ms-2 fnt-sz-sm">12345</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex col-12 justify-content-start ms-4 mt-3">
+                                                        <span class="d-flex col-10">
+                                                            <mat-icon color="primary"
+                                                                class="material-symbols-outlined me-2"
+                                                                style="height:16px;width:16px;font-size:16px">
+                                                                chevron_right
+                                                            </mat-icon>
+                                                            <span class="fixed-span fnt-sz-sm">REFERÊNCIA:</span>
+                                                            <span
+                                                                class="dynamic-span fnt-sz-sm
+                                                                ms-2">dfggdfgdfgfddfggdfgdfgfd</span>
+                                                        </span>
+                                                    </div>
+
+                                                </mat-expansion-panel>
+                                            </mat-accordion>
+                                        </mat-card-content>
+                                    </mat-card> 
+                                    
+                                    <!-- <p>{{this.empForm.value | json}}</p> -->
+                                    <div class="d-flex col-12 justify-content-between mt-4">
+                                        <button class="d-flex col-2" color="secondary" mat-stroked-button
+                                            matStepperPrevious>
+                                            <i class="bx bx-left-arrow-alt"></i> Voltar
+                                        </button>
+                                        <button class="d-flex col-3" color="primary" mat-raised-button matStepperNext>
+                                            <mat-icon class="me-2">
+                                                done_all
+                                            </mat-icon>
+                                            SALVAR E CRIAR O.S
+                                        </button>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </mat-step>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-stepper>
+</div>

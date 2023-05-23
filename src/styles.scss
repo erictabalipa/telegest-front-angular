@@ -1,0 +1,151 @@
+/* You can add global styles to this file, and also import other style files */
+
+// MDB SCSS
+@import "mdb-angular-ui-kit/assets/scss/mdb.scss";
+
+// Font Awesome
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+@import "@fortawesome/fontawesome-free/scss/regular.scss";
+@import "@fortawesome/fontawesome-free/scss/brands.scss";
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
+
+button > span.mat-button-wrapper{
+ width: 100%!important;
+}
+
+mat-expansion-panel-header{
+  padding:12px!important;
+}
+
+.card-default {
+  padding: 82px 10px;
+}
+.container {
+  padding: 30px 40px;
+}
+
+.sm-title {
+  font-family: "Poppins" !important;
+  margin: 0 !important;
+  margin-bottom: 12px !important;
+  font-size: 20px !important;
+  opacity: 0.8;
+}
+.lg-title {
+  font-family: "Poppins" !important;
+  margin: 0 !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+}
+table {
+  width: 100%;
+}
+
+.my-custom-card {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07) !important;
+  padding: 25px 30px !important;
+  padding-top: 5px !important;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+.mt-4 {
+  margin-top: 1.4rem;
+}
+
+table {
+  th {
+    font-size: 16px !important;
+    font-family: "Poppins";
+    padding: 0 5px !important;
+  }
+  td {
+    font-size: 15px !important;
+    font-family: "Poppins";
+    padding: 0 5px;
+    cursor: pointer;
+    transition: 0.3s all;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .table-line-inactive {
+    background-color: #f95656;
+    color: #fff;
+    &:hover {
+      background-color: #f64949;
+    }
+  }
+}
+
+label {
+  font-family: "Poppins" !important;
+}
+input {
+  font-family: "Poppins" !important;
+  padding: 3px !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+}
+.m-auto {
+  display: flex;
+  align-items: center;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.pt-10 {
+  padding-top: 10px !important;
+}
+.mt-0 {
+  margin-top: 10px !important;
+}
+.button-group {
+  gap: 15px;
+  display: flex;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+span.mat-content.ng-tns-c59-2.mat-content-hide-toggle,
+span.mat-content.ng-tns-c59-4.mat-content-hide-toggle,
+span.mat-content.ng-tns-c59-6.mat-content-hide-toggle,
+span.mat-content.ng-tns-c59-8.mat-content-hide-toggle{
+  margin-right: 0px !important;
+}
+
+.mat-select-value{
+  padding-top: 1.05em!important;
+}
+
+#cod .mat-form-field-wrapper,#resp .mat-form-field-wrapper,#maxDate .mat-form-field-wrapper,#priority .mat-form-field-wrapper{
+    width: 100%!important;
+    position: initial!important;
+}
+
+mat-card-header#titleStepOne.mat-card-header > .mat-card-header-text{
+    margin: 0px!important;
+}
+
+td.mat-cell:last-of-type{
+  padding-right: 0px!important;
+}
+
+td.mat-cell:first-of-type{
+  padding-left: 0px!important;
+  padding-right: 20px!important;
+  text-align: center!important;
+}
